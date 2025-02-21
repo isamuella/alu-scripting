@@ -15,19 +15,17 @@ def top_ten(subreddit):
     params = {"limit": 10}
 
     try:
-        response = requests.get(url, headers=headers, params=params, allow_redirects=False)
+        response = requests.get(
+            url, headers=headers, params=params, allow_redirects=False
+        )
 
         if response.status_code != 200:
             print(None)
             return
 
-        try:
-            data = response.json()
-        except ValueError:
-            print(None)
-            return
-
+        data = response.json()
         posts = data.get('data', {}).get('children', [])
+
         if not posts:
             print(None)
             return
